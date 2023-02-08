@@ -19,10 +19,12 @@ public class Contact {
     private Gender gender;
     @OneToMany
     private List<Relationship> relationships;
+    @ManyToOne
+    private User user;
 
     public Contact() {}
 
-    public Contact(Long id, String firstName, String lastName, LocalDate birthDate, String picture, Gender gender, List<Relationship> relationships) {
+    public Contact(Long id, String firstName, String lastName, LocalDate birthDate, String picture, Gender gender, List<Relationship> relationships, User user) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -30,6 +32,7 @@ public class Contact {
         this.picture = picture;
         this.gender = gender;
         this.relationships = relationships;
+        this.user = user;
     }
 
     public Long getId() {
@@ -80,11 +83,19 @@ public class Contact {
         this.gender = gender;
     }
 
-    public List<Relationship> getRelationShips() {
+    public List<Relationship> getRelationships() {
         return relationships;
     }
 
-    public void setRelationShips(List<Relationship> relationships) {
+    public void setRelationships(List<Relationship> relationships) {
         this.relationships = relationships;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
