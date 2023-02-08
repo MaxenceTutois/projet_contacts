@@ -8,14 +8,27 @@
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
 </head>
 <body>
-<header class="content-header"></header>
-<main class="container">
-    <div class="row">
-        <div class="col-md-6 offset-md-3 m-4">
-            <h2>Welcome!</h2>
-            <p>
-                This is the PhoneBook Project.
-            </p>
+<header></header>
+<main>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 offset-md-3">
+                <h2 text="Login"></h2>
+                <form action="#" th:action="@{/home}" method="post">
+                    <div class="form-group mb-4">
+                        <label for="email">Email</label>
+                        <input id="email" class="form-control" name="email" type="email" placeholder="E-mail"
+                               required/>
+                    </div>
+                    <div class="form-group mb-4">
+                        <label for="pwd">Password</label>
+                        <input id="pwd" class="form-control" name="password" type="password" placeholder="Password"
+                               required/>
+                    </div>
+                    <input class="btn btn-primary mb-4" type="submit" value="Log in"/>
+                </form>
+                <p>No account yet? <a th:href="@{/register}">Create one here</a>. </p>
+            </div>
         </div>
     </div>
 </main>
