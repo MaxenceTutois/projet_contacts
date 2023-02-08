@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+
+<h1>Ajout d'un utilisateur</h1>
+
+<form action="#" th:action="@{/register}" th:object="${register}" method="post">
+    <div class="mb-3">
+        <label for="formGroupExampleInput3" class="form-label">Model</label>
+        <input name="firstName" type="text" th:field="*{firstName}" class="form-control"
+               id="formGroupExampleInput3">
+    </div>
+    <div class="mb-3">
+        <label for="formGroupExampleInput2" class="form-label">Type d'utilisation</label>
+        <input name="performance" type="text" th:field="*{prix}" class="form-control"
+               id="formGroupExampleInput1">
+    </div>
+    <div class="mb-3">
+        <label for="formGroupExampleInput2" class="form-label">Prix</label>
+        <input name="prix" type="text" th:field="*{performance}" class="form-control"
+               id="formGroupExampleInput2">
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-6 col-sm-6 col-xs-12">
+
+            <div class="form-group"> <!-- Date input -->
+                <label class="control-label" for="date">Date</label>
+                <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY"
+                       type="date" th:field="*{date}"/>
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Valider</button>
+</form>
+
+</body>
+</html>
