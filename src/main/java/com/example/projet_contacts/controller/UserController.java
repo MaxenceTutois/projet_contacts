@@ -11,12 +11,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+    @GetMapping("/home")
+    public String home(Model model){
+        return "/home";
+    }
 
     @GetMapping("/register")
     public String addUser(Model model){
@@ -28,7 +31,7 @@ public class UserController {
     @PostMapping("/register")
     public String addUser(User user){
         userService.save(user);
-        return "redirect:/list_user";
+        return "redirect:/home";
     }
 
 }
