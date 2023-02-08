@@ -1,5 +1,6 @@
 package com.example.projet_contacts.entity;
 
+import com.example.projet_contacts.entity.enums.TypeRelationship;
 import jakarta.persistence.*;
 
 @Entity
