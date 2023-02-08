@@ -17,7 +17,7 @@ public class Contact {
     private LocalDate birthDate;
     private String picture;
     private Gender gender;
-    @ManyToMany
+    @OneToMany
     private List<Relationship> relationships;
 
     public Contact() {}
