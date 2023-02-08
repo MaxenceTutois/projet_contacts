@@ -8,7 +8,7 @@
 
 <h1>Ajout d'un utilisateur</h1>
 
-<form action="#" th:action="@{/register}" th:object="${register}" method="post">
+<form action="#" th:action="@{/register}" th:object="${user}" method="post">
     <div class="mb-3">
         <label for="formGroupExampleInput3" class="form-label">Model</label>
         <input name="firstName" type="text" th:field="*{firstName}" class="form-control"
@@ -25,17 +25,6 @@
                id="formGroupExampleInput2">
     </div>
 
-
-    <div class="row">
-        <div class="col-md-6 col-sm-6 col-xs-12">
-
-            <div class="form-group"> <!-- Date input -->
-                <label class="control-label" for="date">Date</label>
-                <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY"
-                       type="date" th:field="*{date}"/>
-            </div>
-        </div>
-    </div>
     <button type="submit" class="btn btn-primary">Valider</button>
 </form>
 
