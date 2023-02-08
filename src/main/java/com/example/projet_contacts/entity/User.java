@@ -1,9 +1,8 @@
 package com.example.projet_contacts.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class User {
@@ -22,18 +21,20 @@ public class User {
 
     private String motDePasse;
 
+    @OneToMany
+    private List<Contact> contacts;
 
     public User() {
     }
 
-
-    public User(Long id, String firstName, String lastName, String email, String img, String motDePasse) {
+    public User(Long id, String firstName, String lastName, String email, String img, String motDePasse, List<Contact> contacts) {
         Id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.img = img;
         this.motDePasse = motDePasse;
+        this.contacts = contacts;
     }
 
 
@@ -83,5 +84,13 @@ public class User {
 
     public void setMotDePasse(String motDePasse) {
         this.motDePasse = motDePasse;
+    }
+
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(List<Contact> contacts) {
+        this.contacts = contacts;
     }
 }
