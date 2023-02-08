@@ -17,7 +17,7 @@ public class Contact {
     private LocalDate birthDate;
     private String picture;
     private Gender gender;
-    @OneToMany
+    @OneToMany(mappedBy = "owner")
     private List<Relationship> relationships;
     @ManyToOne
     private User user;
