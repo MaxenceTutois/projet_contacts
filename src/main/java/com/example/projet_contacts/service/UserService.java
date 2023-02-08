@@ -1,5 +1,6 @@
 package com.example.projet_contacts.service;
 
+import com.example.projet_contacts.entity.Contact;
 import com.example.projet_contacts.entity.User;
 import com.example.projet_contacts.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
