@@ -18,18 +18,18 @@ public class Contact {
     private String picture;
     private Gender gender;
     @ManyToMany
-    private List<RelationShip> relationShips;
+    private List<Relationship> relationships;
 
     public Contact() {}
 
-    public Contact(Long id, String firstName, String lastName, LocalDate birthDate, String picture, Gender gender, List<RelationShip> relationShips) {
+    public Contact(Long id, String firstName, String lastName, LocalDate birthDate, String picture, Gender gender, List<Relationship> relationships) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.birthDate = birthDate;
         this.picture = picture;
         this.gender = gender;
-        this.relationShips = relationShips;
+        this.relationships = relationships;
     }
 
     public Long getId() {
@@ -80,11 +80,11 @@ public class Contact {
         this.gender = gender;
     }
 
-    public List<RelationShip> getRelationShips() {
-        return relationShips;
+    public List<Relationship> getRelationShips() {
+        return relationships;
     }
 
-    public void setRelationShips(List<RelationShip> relationShips) {
-        this.relationShips = relationShips;
+    public void setRelationShips(List<Relationship> relationships) {
+        this.relationships = relationships;
     }
 }
