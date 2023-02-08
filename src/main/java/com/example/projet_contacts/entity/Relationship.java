@@ -9,17 +9,17 @@ public class Relationship {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne
-    private Contact contact1;
+    private Contact owner;
     @ManyToOne
-    private Contact contact2;
+    private Contact target;
     private TypeRelationship typeRelationship;
 
     public Relationship() {}
 
-    public Relationship(Long id, Contact contact1, Contact contact2, TypeRelationship typeRelationship) {
+    public Relationship(Long id, Contact owner, Contact target, TypeRelationship typeRelationship) {
         this.id = id;
-        this.contact1 = contact1;
-        this.contact2 = contact2;
+        this.owner = owner;
+        this.target = target;
         this.typeRelationship = typeRelationship;
     }
 
@@ -31,20 +31,20 @@ public class Relationship {
         this.id = id;
     }
 
-    public Contact getContact1() {
-        return contact1;
+    public Contact getOwner() {
+        return owner;
     }
 
-    public void setContact1(Contact contact1) {
-        this.contact1 = contact1;
+    public void setOwner(Contact owner) {
+        this.owner = owner;
     }
 
-    public Contact getContact2() {
-        return contact2;
+    public Contact getTarget() {
+        return target;
     }
 
-    public void setContact2(Contact contact2) {
-        this.contact2 = contact2;
+    public void setTarget(Contact target) {
+        this.target = target;
     }
 
     public TypeRelationship getTypeRelationship() {
