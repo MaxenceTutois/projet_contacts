@@ -17,6 +17,10 @@ public class ContactService {
         return contactRepository.findAll();
     }
 
+    public List<Contact> searchContact(String search) {
+        return contactRepository.findByFirstNameContainingOrLastNameContaining(search, search);
+    }
+
     public Optional<Contact> findById(Long id) {
         return contactRepository.findById(id);
     }
@@ -28,4 +32,8 @@ public class ContactService {
     public void deleteById(Long id) {
         contactRepository.deleteById(id);
     }
+
+
+
+
 }
