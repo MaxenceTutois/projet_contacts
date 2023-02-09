@@ -55,11 +55,13 @@
     </div>
 
     <div class="mb-3">
-        <label for="formGroupExampleInput2" class="form-label">Genre :</label>
-        <select name="gender" th:field="*{gender}" id="pet-select">
-            <option value="">--Please choose an option--</option>
-            <option value="femme">Femme</option>
-            <option value="homme">Homme</option>
+        <label for="gender" class="form-label">Genre :</label>
+        <select id = "gender" th:field="*{gender}" >
+            <optgroup label="select gender">
+                <option th:each="gender:${T(com.example.projet_contacts.entity.enums.Gender).values()}"
+                th:value="${gender}"
+                th:text="${gender}"> </option>
+            </optgroup>
         </select>
 
     </div>
