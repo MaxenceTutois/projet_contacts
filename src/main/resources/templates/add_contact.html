@@ -11,7 +11,8 @@
 
 <h1>Ajout d'un contact</h1>
 
-<form action="#" th:action="@{/add_contact}" th:object="${contact}" method="post">
+<form  action="#" th:action="@{/add_contact}" th:object="${contact}" method="post">
+    <input th:field = "*{id}" type = "hidden">
     <div class="mb-3">
         <label for="formGroupExampleInput1" class="form-label">FirstName :</label>
         <input name="firstName" type="text" th:field="*{firstName}" class="form-control"
