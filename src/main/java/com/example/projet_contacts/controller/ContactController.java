@@ -54,7 +54,7 @@ public class ContactController {
         contactService.save(contact);
         return "redirect:/list_contact";
     }
-
+//
     @GetMapping("/contact/{id}")
     private String showContact(Model model, @PathVariable Optional<Long> id) {
         // TODO empêcher d'accéder à un contact d'un autre user via l'url
