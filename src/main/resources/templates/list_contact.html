@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <title>List contact</title>
+</head>
+
+<body>
+
+<header>
+  <form class="d-flex" action="#" role="search" method="get" th:action="${action}">
+    <input id="search" name="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+    <button class="btn btn-outline-success" type="submit">Search</button>
+  </form>
+</header>
+
+<h1>Liste des contacts</h1>
+<!--CARD BOOTSTRAP-->
+<!--<div class="card" style="width: 18rem;">-->
+<!--    <img src="..." class="card-img-top" alt="...">-->
+<!--    <div class="card-body">-->
+<!--        <h5 class="card-title">Card title</h5>-->
+<!--        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>-->
+<!--        <a href="#" class="btn btn-primary">Go somewhere</a>-->
+<!--    </div>-->
+<!--</div>-->
+<!--FIN CARD BOOTSTRAP-->
+
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">ID</th>
+    <th scope="col">First name</th>
+    <th scope="col">Last name</th>
+    <th scope="col">birth date</th>
+    <th scope="col">Picture</th>
+    <th scope="col">Gender</th>
+
+  </tr>
+  </thead>
+  <tbody>
+
+  <tr th:each="contact: ${contacts}">
+    <td th:text="${contact.id}" class="card-title"></td>
+    <td class="card-title"><a th:text="${contact.firstName}" th:href="@{'/contact/'+${contact.id}}"></a></td>
+    <td th:text="${contact.lastName}" class="card-text"></td>
+    <td th:text="${contact.birthDate}" class="card-text"></td>
+    <td th:text="${contact.picture}" class="card-text"></td>
+    <td th:text="${contact.gender}" class="card-text"></td>
+
+  </tr>
+
+  </tbody>
+</table>
+
+
+</body>
+</html>
