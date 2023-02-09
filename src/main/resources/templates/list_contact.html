@@ -10,14 +10,18 @@
 <body>
 
 <header>
-    <form class="d-flex" action="#" role="search" method="get" th:action="${action}">
-        <input id="search" name="search" class="form-control me-2" type="search" placeholder="Search"
-               aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <h2>Liste des contacts</h2>
+            <form class="d-flex" action="#" role="search" method="get" th:action="${action}">
+                <input id="search" name="search" class="form-control me-2" type="search" placeholder="Search"
+                       aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+            <a th:href="@{'/add_contact'}" class="btn btn-primary">Ajoute un contact a ma liste</a>
+        </div>
+    </nav>
 </header>
-
-<h1>Liste des contacts</h1>
 
 <!--CARD BOOTSTRAP-->
 <div class="container">
@@ -26,7 +30,12 @@
             <img src="#" th:src="${contact.picture}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h1 class="card-title" th:text="${contact.firstName+' '+contact.lastName}"></h1>
+                <a>Birthday : </a>
                 <p th:text="${contact.birthDate}" class="card-text"></p>
+                <a>Phone Number :</a>
+                <p th:text="${contact.phoneNumber}" class="card-text"></p>
+                <a>Email :</a>
+                <p th:text="${contact.email}" class="card-text"></p>
                 <a th:href="@{'/contact/'+${contact.id}}" class="btn btn-primary">Edit profil</a>
             </div>
         </div>
