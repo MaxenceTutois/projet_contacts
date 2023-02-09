@@ -75,4 +75,40 @@ public class ContactController {
         contactService.deleteById(id);
         return "redirect:/list_contact";
     }
+
+    @GetMapping("/relation_contact/{id}")
+    private String showContactsForRelationship(Model model, @PathVariable Long id) {
+        Optional<Contact> contact = contactService.findById(id);
+        if (contact.isEmpty())
+            return "redirect:/list_contact";
+
+        model.addAttribute("contact", contact.get());
+        model.addAttribute("contacts", contactService.findAll());
+
+        return "relation_contact";
+    }
+
+    @GetMapping("/relation_pick")
+    private String showTypesForRelationship(Model model, @RequestParam Long ownerId, @RequestParam Long targetId) {
+        //TODO empêcher contacts d'autres users
+        Optional<Contact> optOwner = contactService.findById(ownerId);
+        Optional<Contact> optTarget = contactService.findById(targetId);
+        if (optOwner.isEmpty() || optTarget.isEmpty())
+            return "redirect:/list_contact";
+
+        model.addAttribute("owner", optOwner.get());
+        model.addAttribute("target", optTarget.get());
+
+        return "relation_pick";
+    }
+
+    @PostMapping("relation_pick")
+    private String selectTypeOfRelationship(@RequestParam Long ownerId, @RequestParam Long targetId) {
+        Optional<Contact> optOwner = contactService.findById(ownerId);
+        Optional<Contact> optTarget = contactService.findById(targetId);
+        if (optOwner.isEmpty() || optTarget.isEmpty())
+            return "redirect:/list_contact";
+
+        return "list_contact";
+    }
 }
