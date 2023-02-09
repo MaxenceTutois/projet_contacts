@@ -30,6 +30,7 @@ public class ContactService {
     }
 
     public void deleteById(Long id) {
+        // TODO supprimer les relations du contact avant de le supprimer
         contactRepository.deleteById(id);
     }
 
