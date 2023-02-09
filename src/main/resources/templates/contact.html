@@ -18,24 +18,30 @@
     </div>
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <table th:if="${hasElements}" class="table table-striped table-bordered table-hover">
-                <caption>Cats</caption>
-                <thead>
-                <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Relationship</th>
-                    <th scope="col"></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="contact: ${contacts}">
-                    <td><a th:href="@{'/contacts/' + ${contact.id}}"
-                           th:text="${contact.firstName + ' ' + contact.lastName}"></a></td>
-                    <td th:text="${contact.relationships?.typeRelationship}"></td>
-                    <td th:></td>
-                </tr>
-                </tbody>
-            </table>
+            <div th:with="hasElements = ${contact.relationships.size() > 0}" class="col-md-6 offset-md-3">
+                <table th:if="${hasElements}" class="table table-striped table-bordered table-hover">
+                    <caption>Cats</caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Relationship</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="contact: ${relationships}">
+                        <td><a th:href="@{'/contacts/' + ${contact.id}}"
+                               th:text="${contact.firstName + ' ' + contact.lastName}"></a></td>
+                        <td th:text="${contact.relationships?.}"></td>
+                        <td th:></td>
+                    </tr>
+                    </tbody>
+                </table>
+                <b th:unless="${hasElements}">No relationship found for this contact</b>
+                <div>
+                    <a class="btn btn-primary" th:href="@{'/contacts'}">New relation</a>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">
