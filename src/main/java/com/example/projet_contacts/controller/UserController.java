@@ -18,10 +18,14 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-//    @GetMapping("/home")
-//    public String home(Model model){
-//        return "/home";
-//    }
+    @GetMapping("/home")
+    public String home(Model model){
+        return "/home";
+    }
+    @PostMapping("/home")
+    public String login(){
+        return "redirect:/list_contact";
+    }
 
     @GetMapping("/list_user")
     private String listUser(Model model){
