@@ -1,7 +1,7 @@
 package com.example.projet_contacts.controller;
 
 import com.example.projet_contacts.entity.Contact;
-import com.example.projet_contacts.repository.ContactRepository;
+import com.example.projet_contacts.entity.User;
 import com.example.projet_contacts.service.ContactService;
 import com.example.projet_contacts.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,12 +15,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalLong;
 
 @Controller
 public class ContactController {
 
     @Autowired
     private ContactService contactService;
+    @Autowired
+    private UserService userService;
 
 
     @GetMapping("/list_contact")
@@ -46,11 +49,19 @@ public class ContactController {
             contact = new Contact();
         }
         model.addAttribute("contact", contact);
-        return "/add_contact";
+        List<User> users = userService.findAll();
+        model.addAttribute("users", users);
+        return "register_contact";
     }
 
     @PostMapping("/add_contact")
-    private String addContact(@ModelAttribute Contact contact) {
+    private String addContact(@ModelAttribute Contact contact, @RequestParam Optional<Long> userId) {
+        if(userId.isPresent()){
+            Optional<User> user = userService.findById(userId.get());
+            if(user.isPresent()){
+                contact.setUser(user.get());
+            }
+        }
         contactService.save(contact);
         return "redirect:/list_contact";
     }
