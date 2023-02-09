@@ -21,7 +21,7 @@ public class User {
 
     private String motDePasse;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private List<Contact> contacts;
 
     public User() {

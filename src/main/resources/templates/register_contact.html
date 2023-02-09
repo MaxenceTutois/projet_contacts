@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport">
@@ -11,8 +11,21 @@
 
 <h1>Ajout d'un contact</h1>
 
-<form  action="#" th:action="@{/add_contact}" th:object="${contact}" method="post">
-    <input th:field = "*{id}" type = "hidden">
+
+<form action="#" th:action="@{/add_contact}" th:object="${contact}" method="post">
+
+    <label for="user">user</label>
+    <select id="user" name="userId" class="form-control">
+        <optgroup label="Select user">
+            <option th:each="user: ${users}"
+                    th:value="${user.id}"
+                    th:text="${user.lastName+ ' ' + user.firstName}"
+                    th:selected="${contact.user?.id == user.id}">
+            </option>
+        </optgroup>
+    </select>
+
+    <input th:field="*{id}" type="hidden">
     <div class="mb-3">
         <label for="formGroupExampleInput1" class="form-label">FirstName :</label>
         <input name="firstName" type="text" th:field="*{firstName}" class="form-control"
