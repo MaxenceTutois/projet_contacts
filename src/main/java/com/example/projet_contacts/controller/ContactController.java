@@ -10,16 +10,20 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 public class ContactController {
 
     @Autowired
     private ContactService contactService;
 
-//    @GetMapping("/home")
-//    public String home(Model model){
-//        return "/home";
-//    }
+    @GetMapping("/list_contact")
+    public String listContact(Model model){
+        List<Contact> listContact = contactService.findAll();
+        model.addAttribute("contacts", listContact);
+        return "/list_contact";
+    }
     @GetMapping("/add_contact")
     private String addContact (Model model){
         Contact contact = new Contact();
@@ -30,7 +34,9 @@ public class ContactController {
     @PostMapping("/add_contact")
     private String addContact(@ModelAttribute Contact contact){
         contactService.save(contact);
-        return "redirect:/home";
+        return "redirect:/list_contact";
     }
+
+
 
 }
