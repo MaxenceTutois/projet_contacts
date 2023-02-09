@@ -1,8 +1,10 @@
 package com.example.projet_contacts.controller;
 
 import com.example.projet_contacts.entity.Contact;
+import com.example.projet_contacts.entity.Relationship;
 import com.example.projet_contacts.entity.User;
 import com.example.projet_contacts.service.ContactService;
+import com.example.projet_contacts.service.RelationshipService;
 import com.example.projet_contacts.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +26,8 @@ public class ContactController {
     private ContactService contactService;
     @Autowired
     private UserService userService;
-
+    @Autowired
+    private RelationshipService relationshipService;
 
     @GetMapping("/list_contact")
     public String listContact(Model model, @RequestParam Optional<String> search) {
@@ -76,7 +79,9 @@ public class ContactController {
         Optional<Contact> contact = contactService.findById(id.get());
         if (contact.isEmpty())
             return "redirect:/list_contact";
+        List<Relationship> relationships = relationshipService.findAllRelationshipsHavingId(contact.get().getId());
         model.addAttribute("contact", contact.get());
+        model.addAttribute("relationships", relationships);
         return "contact";
     }
 
