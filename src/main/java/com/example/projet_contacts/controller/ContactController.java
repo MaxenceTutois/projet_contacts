@@ -22,27 +22,8 @@ public class ContactController {
     private ContactService contactService;
 
 
-//    @GetMapping(path = "/test")
-//    public String getAllContact() {
-//        return "/show_contact";
-//    }
-
-//    @GetMapping(path = "/all")
-//    public String getAllContact(Model model,
-//                                @RequestParam Optional<String> search) {
-//        List<Contact> contacts;
-//        if (search.isEmpty() || search.get().length() == 0)
-//            contacts = contactRepository.findAll();
-//        else
-//            contacts = contactRepository.findByFirstNameContaining(search.get());
-//
-//        model.addAttribute("search", contacts);
-//
-//        return "/show_contact";
-//    }
-
     @GetMapping("/list_contact")
-    public String listContact(Model model, @RequestParam Optional<String> search){
+    public String listContact(Model model, @RequestParam Optional<String> search) {
 
         List<Contact> contacts;
         if (search.isEmpty() || search.get().length() == 0)
@@ -52,19 +33,26 @@ public class ContactController {
         model.addAttribute("contacts", contacts);
         return "/list_contact";
     }
+
     @GetMapping("/add_contact")
-    private String addContact (Model model){
-        Contact contact = new Contact();
+    private String addContact(Model model,@RequestParam Optional<Long> id) {
+        Contact contact;
+        if (id.isPresent()) {
+            Optional<Contact> optionalContact = contactService.findById(id.get());
+            contact = optionalContact.isPresent() ? optionalContact.get() : new Contact();
+
+        } else {
+            contact = new Contact();
+        }
         model.addAttribute("contact", contact);
         return "/add_contact";
     }
 
     @PostMapping("/add_contact")
-    private String addContact(@ModelAttribute Contact contact){
+    private String addContact(@ModelAttribute Contact contact) {
         contactService.save(contact);
         return "redirect:/list_contact";
     }
-
 
 
 }
