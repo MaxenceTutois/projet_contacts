@@ -11,5 +11,6 @@ public interface RelationshipRepository extends JpaRepository<Relationship, Long
 
     List<Relationship> findAllByTargetId(Long targetId);
 
+
     void deleteAllByOwnerIdOrTargetId(Long ownerId, Long targetId);
 }
