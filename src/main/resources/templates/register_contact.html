@@ -7,26 +7,13 @@
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <title>Contact</title>
 </head>
-
-<header>
-    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
-        <div class="row align-items-center">
-            <div class="col">
-                <a th:href="@{'/add_user?id='}" class="">
-                    <img src="https://img.icons8.com/stickers/100/null/user.png"/>
-                </a>
-            </div>
-        </div>
-    </nav>
-</header>
-
 <body>
-
+<header>
+</header>
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <h1>Contact</h1>
-            <button href="#" th:href="@{/list_contact}" class="btn btn-danger">Back</button>
             <form action="#" th:action="@{/add_contact}" th:object="${contact}" method="post">
 
                 <label for="user">User</label>
