@@ -29,8 +29,12 @@ public class UserController {
     }
 
     @PostMapping("/home")
-    public String login() {
-        return "redirect:/list_contact";
+    public String login(@RequestParam String email, @RequestParam String password){
+        Optional<User> optUser = userService.findByEmailAndPassword(email, password);
+        if (optUser.isPresent()) {
+            return "redirect:/list_contact";
+        }
+        return "/home";
     }
 
     @GetMapping("/list_user")
@@ -57,7 +61,7 @@ public class UserController {
     @PostMapping("/add_user")
     public String addUser(User user) {
         userService.save(user);
-        return "redirect:/list_user";
+        return "redirect:/list_contact";
     }
 
     @PostMapping("/user/{id}")
