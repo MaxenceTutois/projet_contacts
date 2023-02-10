@@ -1,0 +1,8 @@
+body {
+    font-family: 'Fira Sans Condensed', sans-serif;
+    font-family: 'Syne Mono', monospace;
+}
+
+.container{
+    padding : 20px;
+}
