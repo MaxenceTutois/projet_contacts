@@ -30,9 +30,16 @@
                     </thead>
                     <tbody>
                     <tr th:each="r: ${relationships}">
-                        <td><a th:href=""></a></td>
-                        <td></td>
-                        <td></td>
+                        <td><a th:href="@{'/contact/' + ${r.owner.id}}"
+                               th:text="${r.owner.firstName} + ' ' + ${r.owner.lastName}"></a></td>
+                        <td th:text="${r.typeRelationship.value}"></td>
+                        <td>
+                            <form action="#"
+                                  th:action="@{'/contact/' + ${contact.id} + '/' + ${r.owner.id} + '/' + ${r.target.id}}"
+                                  method="post">
+                                <input class="btn btn-danger" type="submit" value="Delete"/>
+                            </form>
+                        </td>
                     </tr>
                     </tbody>
                 </table>
@@ -49,7 +56,7 @@
         </div>
         <div class="col-md-2 offset-md-2">
             <form action="#" th:action="${action}" method="post">
-                <input class="btn btn-danger" type="submit" value="Delete"/>
+                <input class="btn btn-danger" type="submit" value="Delete contact"/>
             </form>
         </div>
     </div>

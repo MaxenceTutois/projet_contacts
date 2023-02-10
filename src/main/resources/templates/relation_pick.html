@@ -12,24 +12,39 @@
 <main>
     <div class="container">
         <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <!-- Rappel du contact sélectionné-->
-                <h4></h4>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <form>
-                    <div class="form-group mb-4">
-                        <input type="radio" th:each="rship: ${T(com.example.projet_contacts.entity.enums.TypeRelationship).values()}"
-                        th:value="rship"
-                        th:text="rship.getValue(target.gender)">
+            <div class="col-md-3 offset-md-1">
+                <div class="card m-4">
+                    <img src="#" th:src="${owner.picture}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${owner.firstName + ' ' + owner.lastName}"></h5>
                     </div>
-                    <input class="btn btn-primary" type="submit" value="Submit"/>
-                </form>
+                </div>
             </div>
             <div class="col-md-4">
-                <h4></h4>
+                <form action="#" th:action="@{/relation_pick}" method="post">
+                    <input name="ownerId" th:value="${owner.id}" type="hidden">
+                    <input name="targetId" th:value="${target.id}" type="hidden">
+                    <div class="form-group mb-4">
+                        <label for="relationship">Is ... Of</label>
+                        <select id="relationship" name="tRelationship" class="form-control">
+                            <optgroup label="Is ... Of">
+                                <option th:each="rship: ${T(com.example.projet_contacts.entity.enums.TypeRelationship).values()}"
+                                        th:value="${rship}"
+                                        th:text="${rship.value}" >
+                                </option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <input class="btn btn-primary" type="submit" value="Add relationship"/>
+                </form>
+            </div>
+            <div class="col-md-3">
+                <div class="card m-4">
+                    <img src="#" th:src="${target.picture}" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${target.firstName + ' ' + target.lastName}"></h5>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
