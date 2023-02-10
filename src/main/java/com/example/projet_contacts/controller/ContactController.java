@@ -88,7 +88,7 @@ public class ContactController {
     @PostMapping("/contact/{id}")
     private String deleteContact(@PathVariable Long id) {
         // TODO empêcher de supprimer le contact d'un autre user via l'url
-        contactService.deleteById(id);
+        userService.deleteById(id);
         return "redirect:/list_contact";
     }
 
