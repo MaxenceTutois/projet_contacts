@@ -10,5 +10,7 @@ import java.util.List;
 public interface RelationshipRepository extends JpaRepository<Relationship, Long> {
     List<Relationship> findAllByOwnerIdOrTargetId(Long ownerId, Long targetId);
 
+    List<Relationship> findAllByTargetId(Long targetId);
+
     void deleteAllByOwnerIdOrTargetId(Long ownerId, Long targetId);
 }
