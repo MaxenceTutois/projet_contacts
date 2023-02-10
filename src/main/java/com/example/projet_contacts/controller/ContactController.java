@@ -92,9 +92,18 @@ public class ContactController {
     @PostMapping("/contact/{id}")
     private String deleteContact(@PathVariable Long id) {
         // TODO empêcher de supprimer le contact d'un autre user via l'url
-
+        relationshipService.deleteAllRelationshipsForContact(id);
         contactService.deleteById(id);
         return "redirect:/list_contact";
+    }
+
+    @PostMapping("/contact/{id}/{delOwner}/{delTarget}")
+    private String deleteRelationShip(Model model, @PathVariable Long id, @PathVariable Long delOwner, @PathVariable Long delTarget) {
+        if (contactService.findById(delOwner).isPresent() && contactService.findById(delTarget).isPresent())
+            relationshipService.deleteBothSidesOfRelationship(delOwner, delTarget);
+
+        model.addAttribute("id", id);
+        return "redirect:/contact/{id}";
     }
 
     @GetMapping("/relation_contact/{id}")
@@ -124,8 +133,12 @@ public class ContactController {
     }
 
     @PostMapping("/relation_pick")
-    private String selectTypeOfRelationship(@RequestParam Long ownerId, @RequestParam Long targetId, @RequestParam TypeRelationship tRelationship) {
+    private String selectTypeOfRelationship(Model model, @RequestParam Long ownerId, @RequestParam Long targetId, @RequestParam TypeRelationship tRelationship) {
         relationshipService.setRelationship(ownerId, targetId, tRelationship);
+
+        // Ne fonctionne pas ici mais fonctionne dans deleteRelationship, pour une raison inconnue
+        /*model.addAttribute("id", ownerId);
+        return "redirect:/contact/{id}";*/
 
         return "redirect:/list_contact";
     }

@@ -13,63 +13,55 @@
         <div class="col-md-6 offset-md-3">
             <h1 th:text="${'Profile : '+contact.firstName + ' ' + contact.lastName}">Edit Contact</h1>
             <img src="" class="rounded mx-auto d-block" alt="Contact's picture"/>
-            <!--            <h4 th:text="${contact.firstName + ' ' + contact.lastName}"></h4>-->
-            <!--            <p th:text="'Birthday: ' + ${contact.birthDate}"></p>-->
-            <a><strong>Phone Number :</strong></a>
-            <p th:text="${contact.phoneNumber}" class="card-text"></p>
+            <h4 th:text="${contact.firstName + ' ' + contact.lastName}"></h4>
+            <p th:text="'Birthday: ' + ${contact.birthDate}"></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div th:with="hasElements = ${relationships.size() > 0}" class="col-md-6 offset-md-3">
+                <table th:if="${hasElements}" class="table table-striped table-bordered table-hover">
+                    <caption>Relationships</caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Relationship</th>
+                        <th scope="col"></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="r: ${relationships}">
+                        <td><a th:href="@{'/contact/' + ${r.owner.id}}"
+                               th:text="${r.owner.firstName} + ' ' + ${r.owner.lastName}"></a></td>
+                        <td th:text="${r.typeRelationship.value}"></td>
+                        <td>
+                            <form action="#"
+                                  th:action="@{'/contact/' + ${contact.id} + '/' + ${r.owner.id} + '/' + ${r.target.id}}"
+                                  method="post">
+                                <input class="btn btn-danger" type="submit" value="Delete"/>
+                            </form>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <b th:unless="${hasElements}">No relationship found for this contact</b>
+                <div>
+                    <a class="btn btn-primary" th:href="@{'/relation_contact/' + ${contact.id}}">Add relationship</a>
 
-            <a><strong>Email :</strong></a>
-            <p th:text="${contact.email}" class="card-text"></p>
-
-            <a><strong>Birthday : </strong></a>
-            <p th:text="${contact.birthDate}" class="card-text"></p>
-
-
-            <div class="container">
-                <div class="row">
-                    <div class="col order-last">
-                        <form action="#" th:action="${action}" method="post">
-                            <input class="btn btn-danger" type="submit" value="Delete"/>
-                        </form>
-                    </div>
-                    <div class="col">
-                        <a class="btn btn-primary" th:href="@{'/add_contact?id=' + ${contact.id}}">Update</a>
-                    </div>
-                    <div class="col order-first">
-                        <a class="btn btn-primary" th:href="@{'/relation_contact/' + ${contact.id}}">Add
-                            relationship</a>
-                    </div>
                 </div>
             </div>
         </div>
 
     </div>
-    <!--    </div>-->
-    <!--    <div class="row">-->
-    <!--        <div class="col-md-6 offset-md-3">-->
-    <div th:with="hasElements = ${relationships.size() > 0}" class="col-md-6 offset-md-3">
-        <table th:if="${hasElements}" class="table table-striped table-bordered table-hover">
-            <caption>Relationships</caption>
-            <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Relationship</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr th:each="r: ${relationships}">
-                <td><a th:href="@{'/contact/' + ${r.owner.id}}"
-                       th:text="${r.owner.firstName} + ' ' + ${r.owner.lastName}"></a></td>
-                <td th:text="${r.typeRelationship.value}"></td>
-                <td></td>
-            </tr>
-            </tbody>
-        </table>
-        <b th:unless="${hasElements}">No relationship found for this contact</b>
-        <!--        <div>-->
-        <!--            <a class="btn btn-primary" th:href="@{'/relation_contact/' + ${contact.id}}">Add relationship</a>-->
-        <!--        </div>-->
+    <div class="row">
+        <div class="col-md-2 offset-md-3 mb-2">
+            <a class="btn btn-primary" th:href="@{'/add_contact?id=' + ${contact.id}}">Update</a>
+        </div>
+        <div class="col-md-2 offset-md-2">
+            <form action="#" th:action="${action}" method="post">
+                <input class="btn btn-danger" type="submit" value="Delete contact"/>
+            </form>
+        </div>
     </div>
 </div>
 </div>
