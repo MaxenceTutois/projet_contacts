@@ -12,15 +12,13 @@
           integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link href="../style/style.css" th:href="@{/style/style.css}" rel="stylesheet" />
     <meta charset="UTF-8">
-    <title>List contact</title>
+    <title>Contacts</title>
+    <meta name="viewport">
 </head>
-
 <body>
-
 <header>
     <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
         <div class="container-fluid">
-            <!--            <img th:href="@{'/add_user?id='}" class="btn btn-primary" src="https://img.icons8.com/stickers/100/null/user.png"/>-->
             <a th:href="@{'/add_user?id='}" class="">
                 <img src="https://img.icons8.com/stickers/100/null/user.png"/>
             </a>
@@ -36,8 +34,6 @@
         </div>
     </nav>
 </header>
-
-<!--CARD BOOTSTRAP-->
 <div class="container">
     <div class="row">
         <div th:each="contact: ${contacts}" class="card col-md-4 m-4" style="width: 18rem;">
@@ -52,37 +48,5 @@
         </div>
     </div>
 </div>
-<!--FIN CARD BOOTSTRAP-->
-
-
-<!--<tr th:each="contact: ${contacts}">-->
-<!--  <td th:text="${contact.id}" class="card-title"></td>-->
-<!--  <td class="card-title"><a th:text="${contact.firstName}" th:href="@{'/contact/'+${contact.id}}"></a></td>-->
-<!--  <td th:text="${contact.lastName}" class="card-text"></td>-->
-<!--  <td th:text="${contact.birthDate}" class="card-text"></td>-->
-<!--  <td th:text="${contact.picture}" class="card-text"></td>-->
-<!--  <td th:text="${contact.gender}" class="card-text"></td>-->
-
-<!--</tr>-->
-
-<!--<table class="table">-->
-<!--  <thead>-->
-<!--  <tr>-->
-<!--    <th scope="col">ID</th>-->
-<!--    <th scope="col">First name</th>-->
-<!--    <th scope="col">Last name</th>-->
-<!--    <th scope="col">birth date</th>-->
-<!--    <th scope="col">Picture</th>-->
-<!--    <th scope="col">Gender</th>-->
-
-<!--  </tr>-->
-</thead>
-<tbody>
-
-
-</tbody>
-</table>
-
-
 </body>
 </html>
