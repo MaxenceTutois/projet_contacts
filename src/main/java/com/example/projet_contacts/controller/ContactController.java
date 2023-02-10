@@ -34,11 +34,13 @@ public class ContactController {
     public String listContact(Model model, @RequestParam Optional<String> search) {
 
         List<Contact> contacts;
+        User users = new User();
         if (search.isEmpty() || search.get().length() == 0)
             contacts = contactService.findAll();
         else
             contacts = contactService.searchContact(search.get());
         model.addAttribute("contacts", contacts);
+        model.addAttribute("user", users);
         return "/list_contact";
     }
 
