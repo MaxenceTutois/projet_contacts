@@ -18,10 +18,6 @@ public class RelationshipService {
     @Autowired
     private ContactService contactService;
 
-    public List<Relationship> findAllRelationshipsHavingId(Long contactId) {
-        return relationshipRepository.findAllByOwnerIdOrTargetId(contactId, contactId);
-    }
-
     public List<Relationship> findAllByTargetId(Long targetId) {
         return relationshipRepository.findAllByTargetId(targetId);
     }

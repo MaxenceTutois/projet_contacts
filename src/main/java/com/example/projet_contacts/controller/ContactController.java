@@ -83,7 +83,7 @@ public class ContactController {
         Optional<Contact> contact = contactService.findById(id.get());
         if (contact.isEmpty())
             return "redirect:/list_contact";
-        List<Relationship> relationships = relationshipService.findAllRelationshipsHavingId(contact.get().getId());
+        List<Relationship> relationships = relationshipService.findAllByTargetId(contact.get().getId());
         model.addAttribute("contact", contact.get());
         model.addAttribute("relationships", relationships);
         return "contact";
@@ -126,6 +126,6 @@ public class ContactController {
     private String selectTypeOfRelationship(@RequestParam Long ownerId, @RequestParam Long targetId, @RequestParam TypeRelationship tRelationship) {
         relationshipService.setRelationship(ownerId, targetId, tRelationship);
 
-        return "redirect:/contact/" + ownerId;
+        return "redirect:/list_contact";
     }
 }
