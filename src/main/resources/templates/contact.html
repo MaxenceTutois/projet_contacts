@@ -30,8 +30,9 @@
                     </thead>
                     <tbody>
                     <tr th:each="r: ${relationships}">
-                        <td><a th:href=""></a></td>
-                        <td></td>
+                        <td><a th:href="@{'/contact/' + ${r.owner.id}}"
+                               th:text="${r.owner.firstName} + ' ' + ${r.owner.lastName}"></a></td>
+                        <td th:text="${r.typeRelationship.value}"></td>
                         <td></td>
                     </tr>
                     </tbody>
