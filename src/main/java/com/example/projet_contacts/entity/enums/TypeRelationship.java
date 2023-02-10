@@ -1,27 +1,27 @@
 package com.example.projet_contacts.entity.enums;
 
 public enum TypeRelationship {
-    PARENT("parent", "mother", "father"),
-    CHILD("child", "daughter", "son"),
-    SIBLING("sibling", "sister", "brother"),
-    MARRIED("married to", "wife", "husband");
 
-    private final String sIfUndefined;
-    private final String sIfWoman;
-    private final String sIfMan;
+    MOTHER("mother"),
+    FATHER("father"),
+    PARENT("parent"),
+    DAUGHTER("daughter"),
+    SON("son"),
+    CHILD("child"),
+    WIFE("wife"),
+    HUSBAND("husband"),
+    SPOUSE("spouse"),
+    SISTER("sister"),
+    BROTHER("brother"),
+    SIBLING("sibling");
 
-    private TypeRelationship(String sIfUndefined, String sIfWoman, String sIfMan) {
-        this.sIfUndefined = sIfUndefined;
-        this.sIfWoman = sIfWoman;
-        this.sIfMan = sIfMan;
+    private final String value;
+
+    private TypeRelationship(String value) {
+        this.value = value;
     }
 
-    public String getValue(Gender gender) {
-        switch (gender) {
-            case UNDEFINED: return sIfUndefined;
-            case FEMALE: return sIfWoman;
-            case MALE: return sIfMan;
-            default: return null;
-        }
+    public String getValue() {
+        return value;
     }
 }

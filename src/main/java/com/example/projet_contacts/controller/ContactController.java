@@ -3,6 +3,7 @@ package com.example.projet_contacts.controller;
 import com.example.projet_contacts.entity.Contact;
 import com.example.projet_contacts.entity.Relationship;
 import com.example.projet_contacts.entity.User;
+import com.example.projet_contacts.entity.enums.TypeRelationship;
 import com.example.projet_contacts.service.ContactService;
 import com.example.projet_contacts.service.RelationshipService;
 import com.example.projet_contacts.service.UserService;
@@ -42,7 +43,7 @@ public class ContactController {
     }
 
     @GetMapping("/add_contact")
-    private String addContact(Model model,@RequestParam Optional<Long> id) {
+    private String addContact(Model model, @RequestParam Optional<Long> id) {
         Contact contact;
         if (id.isPresent()) {
             Optional<Contact> optionalContact = contactService.findById(id.get());
@@ -59,16 +60,17 @@ public class ContactController {
 
     @PostMapping("/add_contact")
     private String addContact(@ModelAttribute Contact contact, @RequestParam Optional<Long> userId) {
-        if(userId.isPresent()){
+        if (userId.isPresent()) {
             Optional<User> user = userService.findById(userId.get());
-            if(user.isPresent()){
+            if (user.isPresent()) {
                 contact.setUser(user.get());
             }
         }
         contactService.save(contact);
         return "redirect:/list_contact";
     }
-//
+
+    //
     @GetMapping("/contact/{id}")
     private String showContact(Model model, @PathVariable Optional<Long> id) {
         // TODO empêcher d'accéder à un contact d'un autre user via l'url
@@ -115,16 +117,13 @@ public class ContactController {
         model.addAttribute("owner", optOwner.get());
         model.addAttribute("target", optTarget.get());
 
-        return "relation_pick";
+        return "/relation_pick";
     }
 
-    @PostMapping("relation_pick")
-    private String selectTypeOfRelationship(@RequestParam Long ownerId, @RequestParam Long targetId) {
-        Optional<Contact> optOwner = contactService.findById(ownerId);
-        Optional<Contact> optTarget = contactService.findById(targetId);
-        if (optOwner.isEmpty() || optTarget.isEmpty())
-            return "redirect:/list_contact";
+    @PostMapping("/relation_pick")
+    private String selectTypeOfRelationship(@RequestParam Long ownerId, @RequestParam Long targetId, @RequestParam TypeRelationship tRelationship) {
+        relationshipService.setRelationship(ownerId, targetId, tRelationship);
 
-        return "list_contact";
+        return "redirect:/contact/" + ownerId;
     }
 }
