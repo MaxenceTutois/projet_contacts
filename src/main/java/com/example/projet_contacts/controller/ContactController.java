@@ -1,8 +1,10 @@
 package com.example.projet_contacts.controller;
 
 import com.example.projet_contacts.entity.Contact;
-import com.example.projet_contacts.repository.ContactRepository;
+import com.example.projet_contacts.entity.Relationship;
+import com.example.projet_contacts.entity.User;
 import com.example.projet_contacts.service.ContactService;
+import com.example.projet_contacts.service.RelationshipService;
 import com.example.projet_contacts.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,13 +17,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalLong;
 
 @Controller
 public class ContactController {
 
     @Autowired
     private ContactService contactService;
-
+    @Autowired
+    private UserService userService;
+    @Autowired
+    private RelationshipService relationshipService;
 
     @GetMapping("/list_contact")
     public String listContact(Model model, @RequestParam Optional<String> search) {
@@ -46,11 +52,19 @@ public class ContactController {
             contact = new Contact();
         }
         model.addAttribute("contact", contact);
-        return "/add_contact";
+        List<User> users = userService.findAll();
+        model.addAttribute("users", users);
+        return "register_contact";
     }
 
     @PostMapping("/add_contact")
-    private String addContact(@ModelAttribute Contact contact) {
+    private String addContact(@ModelAttribute Contact contact, @RequestParam Optional<Long> userId) {
+        if(userId.isPresent()){
+            Optional<User> user = userService.findById(userId.get());
+            if(user.isPresent()){
+                contact.setUser(user.get());
+            }
+        }
         contactService.save(contact);
         return "redirect:/list_contact";
     }
@@ -65,7 +79,9 @@ public class ContactController {
         Optional<Contact> contact = contactService.findById(id.get());
         if (contact.isEmpty())
             return "redirect:/list_contact";
+        List<Relationship> relationships = relationshipService.findAllRelationshipsHavingId(contact.get().getId());
         model.addAttribute("contact", contact.get());
+        model.addAttribute("relationships", relationships);
         return "contact";
     }
 
@@ -74,5 +90,41 @@ public class ContactController {
         // TODO empêcher de supprimer le contact d'un autre user via l'url
         contactService.deleteById(id);
         return "redirect:/list_contact";
+    }
+
+    @GetMapping("/relation_contact/{id}")
+    private String showContactsForRelationship(Model model, @PathVariable Long id) {
+        Optional<Contact> contact = contactService.findById(id);
+        if (contact.isEmpty())
+            return "redirect:/list_contact";
+
+        model.addAttribute("contact", contact.get());
+        model.addAttribute("contacts", contactService.findAll());
+
+        return "relation_contact";
+    }
+
+    @GetMapping("/relation_pick")
+    private String showTypesForRelationship(Model model, @RequestParam Long ownerId, @RequestParam Long targetId) {
+        //TODO empêcher contacts d'autres users
+        Optional<Contact> optOwner = contactService.findById(ownerId);
+        Optional<Contact> optTarget = contactService.findById(targetId);
+        if (optOwner.isEmpty() || optTarget.isEmpty())
+            return "redirect:/list_contact";
+
+        model.addAttribute("owner", optOwner.get());
+        model.addAttribute("target", optTarget.get());
+
+        return "relation_pick";
+    }
+
+    @PostMapping("relation_pick")
+    private String selectTypeOfRelationship(@RequestParam Long ownerId, @RequestParam Long targetId) {
+        Optional<Contact> optOwner = contactService.findById(ownerId);
+        Optional<Contact> optTarget = contactService.findById(targetId);
+        if (optOwner.isEmpty() || optTarget.isEmpty())
+            return "redirect:/list_contact";
+
+        return "list_contact";
     }
 }

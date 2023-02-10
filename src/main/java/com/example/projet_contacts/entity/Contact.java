@@ -14,6 +14,8 @@ public class Contact {
     private Long id;
     private String firstName;
     private String lastName;
+    private String phoneNumber;
+    private String email;
     private LocalDate birthDate;
     private String picture;
     private Gender gender;
@@ -24,15 +26,33 @@ public class Contact {
 
     public Contact() {}
 
-    public Contact(Long id, String firstName, String lastName, LocalDate birthDate, String picture, Gender gender, List<Relationship> relationships, User user) {
+    public Contact(Long id, String firstName, String lastName, String phoneNumber, String email, LocalDate birthDate, String picture, Gender gender, List<Relationship> relationships, User user) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
         this.birthDate = birthDate;
         this.picture = picture;
         this.gender = gender;
         this.relationships = relationships;
         this.user = user;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Long getId() {
