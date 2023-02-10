@@ -25,14 +25,14 @@
                 <img src="https://img.icons8.com/stickers/100/null/user.png"/>
             </a>
             <h2>
-                <div data-th-text="${'bonjour ' + user.firstName + ', voici ta liste de contact'}"></div>
+                <div data-th-text="Contacts"></div>
             </h2>
             <form class="d-flex" action="#" role="search" method="get" th:action="${action}">
                 <input id="search" name="search" class="form-control me-2" type="search" placeholder="Search"
                        aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
-            <a th:href="@{'/add_contact'}" class="btn btn-primary">Ajoute un contact a ma liste</a>
+            <a th:href="@{'/add_contact'}" class="btn btn-primary">New contact</a>
         </div>
     </nav>
 </header>
@@ -46,7 +46,7 @@
                 <h1 class="card-title" th:text="${contact.firstName+' '+contact.lastName}"></h1>
                 <div class="d-grid gap-2">
                     <a th:href="@{'/contact/'+${contact.id}}" class="btn btn-primary">
-                        More information</a>
+                        More...</a>
                 </div>
             </div>
         </div>
