@@ -2,7 +2,6 @@ package com.example.projet_contacts.service;
 
 import com.example.projet_contacts.entity.Contact;
 import com.example.projet_contacts.entity.Relationship;
-import com.example.projet_contacts.entity.enums.Gender;
 import com.example.projet_contacts.entity.enums.TypeRelationship;
 import com.example.projet_contacts.repository.RelationshipRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,20 @@ public class RelationshipService {
         return relationshipRepository.findAllByTargetId(targetId);
     }
 
-    public void deleteAllRelationshipsHavingId(Long contactId) {
-        relationshipRepository.deleteAllByOwnerIdOrTargetId(contactId, contactId);
+    public void deleteAllRelationshipsForContact(Long contactId) {
+        List<Relationship> rShips = relationshipRepository.findAllByOwnerIdOrTargetId(contactId, contactId);
+        for (Relationship rShip: rShips) {
+            relationshipRepository.deleteById(rShip.getId());
+        }
+    }
+
+    public void deleteBothSidesOfRelationship(Long ownerId, Long targetId) {
+        Optional<Relationship> optRelationship = relationshipRepository.findFirstByOwnerIdAndTargetId(ownerId, targetId);
+        if (optRelationship.isPresent())
+            relationshipRepository.deleteById(optRelationship.get().getId());
+        optRelationship = relationshipRepository.findFirstByOwnerIdAndTargetId(targetId, ownerId);
+        if (optRelationship.isPresent())
+            relationshipRepository.deleteById(optRelationship.get().getId());
     }
 
     public void setRelationship(Long ownerId, Long targetId, TypeRelationship tRelationship) {
