@@ -32,7 +32,7 @@
           <h1 class="card-title" th:text="${user.firstName+' '+user.lastName}"></h1>
           <a>Email : </a>
           <p th:text="${user.email}" class="card-text"></p>
-          <a th:href="@{'/add_user?id='+${user.id}}" class="btn btn-primary">Edit profil</a>
+          <a th:href="@{'/add_user?id='+${user.id}}" class="btn btn-primary">Edit</a>
         </div>
       </div>
     </div>
