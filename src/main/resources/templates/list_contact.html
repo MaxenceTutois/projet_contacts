@@ -12,6 +12,7 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container-fluid">
+            <a th:href="@{'/add_user?id='}" class="btn btn-primary">Edit profil</a>
             <h2>Liste des contacts</h2>
             <form class="d-flex" action="#" role="search" method="get" th:action="${action}">
                 <input id="search" name="search" class="form-control me-2" type="search" placeholder="Search"
