@@ -18,6 +18,9 @@ public class UserService {
     public Optional<User> findById(Long id) {
         return userRepository.findById(id);
     }
+    public Optional<User> findByEmailAndPassword(String email, String pwd) {
+        return userRepository.findFirstByEmailAndMotDePasse(email, pwd);
+    }
     public void save(User user){
         userRepository.save(user);
     }
