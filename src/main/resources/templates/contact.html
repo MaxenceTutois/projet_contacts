@@ -11,14 +11,26 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <img src="" class="rounded mx-auto d-block" alt="Contact's picture"/>
-            <h4 th:text="${contact.firstName + ' ' + contact.lastName}"></h4>
-            <p th:text="'Birth date: ' + ${contact.birthDate}"></p>
+                <img src="" class="rounded" alt="Contact's picture"/>
+                <h4 th:text="${contact.firstName + ' ' + contact.lastName}"></h4>
+                <p th:text="'Phone: ' + ${contact.phoneNumber}"></p>
+                <p th:text="'Email: ' + ${contact.email}"></p>
+                <p th:text="'Born: ' + ${contact.birthDate}"></p>
+        </div>
+    </div>
+    <div class="row mb-4">
+        <div class="col-md-3 offset-md-3">
+            <a class="btn btn-primary" th:href="@{'/add_contact?id=' + ${contact.id}}">Update contact</a>
+        </div>
+        <div class="col-md-3 offset-md-1">
+            <form action="#" th:action="${action}" method="post">
+                <input class="btn btn-danger" type="submit" value="Delete contact"/>
+            </form>
         </div>
     </div>
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <div th:with="hasElements = ${relationships.size() > 0}" class="col-md-6 offset-md-3">
+            <div th:with="hasElements = ${relationships.size() > 0}">
                 <table th:if="${hasElements}" class="table table-striped table-bordered table-hover">
                     <caption>Relationships</caption>
                     <thead>
@@ -46,20 +58,8 @@
                 <b th:unless="${hasElements}">No relationship found for this contact</b>
                 <div>
                     <a class="btn btn-primary" th:href="@{'/relation_contact/' + ${contact.id}}">Add relationship</a>
-
                 </div>
             </div>
-        </div>
-
-    </div>
-    <div class="row">
-        <div class="col-md-2 offset-md-3 mb-2">
-            <a class="btn btn-primary" th:href="@{'/add_contact?id=' + ${contact.id}}">Update</a>
-        </div>
-        <div class="col-md-2 offset-md-2">
-            <form action="#" th:action="${action}" method="post">
-                <input class="btn btn-danger" type="submit" value="Delete contact"/>
-            </form>
         </div>
     </div>
 </div>

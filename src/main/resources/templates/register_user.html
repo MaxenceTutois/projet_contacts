@@ -11,36 +11,34 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6 offset-md-3">
-            <h1>Ajout d'un utilisateur</h1>
+            <h1>Register</h1>
             <form action="#" th:action="@{/add_user}" th:object="${user}" method="post">
-                <div class="mb-3">
+                <input th:field="*{id}" type="hidden">
+                <div class="form-group mb-3">
                     <label for="formGroupExampleInput3" class="form-label">First name :</label>
                     <input name="firstName" type="text" th:field="*{firstName}" class="form-control"
-                           id="formGroupExampleInput0">
+                           id="formGroupExampleInput0" placeholder="First name">
                 </div>
-                <div class="mb-3">
+                <div class="form-group mb-3">
                     <label for="formGroupExampleInput2" class="form-label">Last name :</label>
                     <input name="lastName" type="text" th:field="*{lastName}" class="form-control"
-                           id="formGroupExampleInput1">
+                           id="formGroupExampleInput1" placeholder="Last name">
                 </div>
-                <div class="mb-3">
+                <div class="form-group mb-3">
                     <label for="formGroupExampleInput2" class="form-label">Email :</label>
-                    <input name="email" type="text" th:field="*{email}" class="form-control"
-                           id="formGroupExampleInput2">
+                    <input name="email" type="email" th:field="*{email}" class="form-control"
+                           id="formGroupExampleInput2" placeholder="Email">
                 </div>
-
-                <div class="mb-3">
+                <div class="form-group mb-3">
                     <label for="formGroupExampleInput2" class="form-label">Password :</label>
-                    <input name="motDePasse" type="text" th:field="*{motDePasse}" class="form-control"
-                           id="formGroupExampleInput5">
+                    <input name="motDePasse" type="password" th:field="*{motDePasse}" class="form-control"
+                           id="formGroupExampleInput5" placeholder="Password">
                 </div>
-
-                <div class="mb-3">
+                <div class="form-group mb-3">
                     <label for="formGroupExampleInput2" class="form-label">Picture :</label>
                     <input name="img" type="file" th:field="*{img}" class="form-control"
                            id="formGroupExampleInput3">
                 </div>
-
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>

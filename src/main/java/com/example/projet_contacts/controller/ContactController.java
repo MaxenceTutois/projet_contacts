@@ -113,7 +113,7 @@ public class ContactController {
             return "redirect:/list_contact";
 
         model.addAttribute("contact", contact.get());
-        model.addAttribute("contacts", contactService.findAll());
+        model.addAttribute("contacts", contactService.findAllButId(id));
 
         return "relation_contact";
     }
