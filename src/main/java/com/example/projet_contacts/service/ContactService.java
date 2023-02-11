@@ -14,15 +14,15 @@ public class ContactService {
     private ContactRepository contactRepository;
 
     public List<Contact> findAll() {
-        return contactRepository.findAll();
+        return contactRepository.findAllByOrderByFirstNameAscLastNameAsc();
     }
 
     public List<Contact> findAllButId(Long id) {
-        return contactRepository.findAllByIdNot(id);
+        return contactRepository.findAllByIdNotOrderByFirstNameAscLastNameAsc(id);
     }
 
     public List<Contact> searchContact(String search) {
-        return contactRepository.findByFirstNameContainingOrLastNameContaining(search, search);
+        return contactRepository.findByFirstNameContainingOrLastNameContainingOrderByFirstNameAscLastNameAsc(search, search);
     }
 
     public Optional<Contact> findById(Long id) {
