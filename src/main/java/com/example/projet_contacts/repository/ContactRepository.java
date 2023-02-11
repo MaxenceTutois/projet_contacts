@@ -10,7 +10,9 @@ import java.util.List;
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, Long> {
 
-    List<Contact> findByFirstNameContainingOrLastNameContaining(String firstName, String lastName);
+    List<Contact> findAllByOrderByFirstNameAscLastNameAsc();
 
-    List<Contact> findAllByIdNot(Long id);
+    List<Contact> findByFirstNameContainingOrLastNameContainingOrderByFirstNameAscLastNameAsc(String firstName, String lastName);
+
+    List<Contact> findAllByIdNotOrderByFirstNameAscLastNameAsc(Long id);
 }
