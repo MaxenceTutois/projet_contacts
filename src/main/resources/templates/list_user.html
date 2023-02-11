@@ -26,7 +26,7 @@
         <img src="#" th:src="${user.img}" class="card-img-top" alt="...">
         <div class="card-body">
           <h1 class="card-title" th:text="${user.firstName+' '+user.lastName}"></h1>
-          <a>Email : </a>
+          <p>Email: </p>
           <p th:text="${user.email}" class="card-text"></p>
           <a th:href="@{'/add_user?id='+${user.id}}" class="btn btn-primary">Edit</a>
         </div>
